@@ -15,15 +15,20 @@ const bookList = [
     }
 ];
 
-const searchInput = null;
+/*const searchInput = document.children[0].children[1].children[1].children[1]; */
+const searchField = document.getElementById('searchField');
+console.log(searchField);
 
-const handleKeyPress = (input) => {
+/* keydown */ 
+searchField.addEventListener("keyup", handleKeyPress);
+
+function handleKeyPress (e) {
     /* Ta emot/läsa av värdet i input fältet.
     Skicka värdet till searchBooks 
     SearchBooks returnerar en filtrerad lista
     Filtrerad lista skickas till funktion som renderBookList*/ 
     
-    searchBooks(input);
+    searchBooks(e.target.value);
 }
 
 function searchBooks(searchTerm){
@@ -49,4 +54,3 @@ function renderBookList(list){
     console.log(list);
 }
 
-handleKeyPress('Ham');
