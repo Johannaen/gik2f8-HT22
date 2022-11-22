@@ -20,33 +20,25 @@ const bookList = [
 console.log(searchField);*/
 
 /* keydown */ 
-searchField.addEventListener("keyup", handleKeyPress);
-
-function handleKeyPress (e) {
-    /* Ta emot/läsa av värdet i input fältet.
-    Skicka värdet till searchBooks 
-    SearchBooks returnerar en filtrerad lista
-    Filtrerad lista skickas till funktion som renderBookList*/ 
-    
-    searchBooks(e.target.value);
-}
+searchField.addEventListener("keyup", (e) => searchBooks(e.target.value));
+// renderBookList( 
+//     bookList.filter(
+//     ({title, author}) => {
+//         const searchTerm = e.target.value.toLowerCase();
+//         return title.toLocaleLowerCase().indexOf(searchTerm) >= 0 || author.toLocaleLowerCase().indexOf(searchTerm) >= 0;
+//         })     
+//     )
+// );    
 
 function searchBooks(searchTerm){
-    /* Loopa igenom bookList
-    För varje varv i loopen, ta det aktuella elementet
-    Jämför titeln med sökterm
-    Om söktermen finns någonstans i titeln, lägg till elementet i en ny lista (filterLIst)  
-    */ 
-
-    const filteredList = [];
-    for(let i = 0; i < bookList.length; i++) {
-        const title = bookList [i].title.toLowerCase();
-        if(title.indexOf(searchTerm.toLowerCase()) >=  0) {
-        filteredList.push(bookList[i]); 
-    }
-    }
-    renderBookList(filteredList);
-}
+     renderBookList( 
+         bookList.filter(
+         ({title, author}) => 
+             title.toLocaleLowerCase().indexOf(searchTerm.toLowerCase()) >= 0 || 
+             author.toLocaleLowerCase().indexOf(searchTerm.toLowerCase()) >= 0
+         )
+     );    
+ }
 
 
 function renderBookList(bookList){
@@ -63,8 +55,6 @@ function renderBookList(bookList){
     }
     if (bookList.length > 0){
         root.insertAdjacentHTML("beforeend", BookList(bookList));    
-    }
-
-    
+    }   
 }
 
